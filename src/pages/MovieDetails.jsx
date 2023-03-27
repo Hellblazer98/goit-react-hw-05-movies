@@ -1,8 +1,11 @@
-import { useParams, useLocation, Link, Outlet } from "react-router-dom";
+import { useParams, useLocation, Outlet } from "react-router-dom";
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { getMovieDetails } from "helpers/api";
 import { Loader } from 'components/Loader/Loader';
 import { MovieInfo } from "components/MovieInfo/MovieInfo";
+import { GoBackLink } from "components/SharedLayout/SharedLayout.styled";
+import { HiArrowLeft } from "react-icons/hi";
+import { LinkDetails, List } from "components/Cast/Cast.styled";
 
 const MovieDetails = () => {
     const { movieId } = useParams();
@@ -31,20 +34,20 @@ const MovieDetails = () => {
     return (
         <main>
             <div>
-                <Link to={goBack.current}>Go back</Link>
+                <GoBackLink to={goBack.current}><HiArrowLeft size='12'/>Go back</GoBackLink>
                 {details && <MovieInfo details={details} />}
                 {isLoading && <Loader />}
                 {error && <span>{error}</span>}
             </div>
             <p>Additional information</p>
-            <ul>
+            <List>
                 <li>
-                    <Link to="cast">Cast</Link>
+                    <LinkDetails to="cast">Cast</LinkDetails>
                 </li>
                 <li>
-                    <Link to="reviews">Reviews</Link>
+                    <LinkDetails to="reviews">Reviews</LinkDetails>
                 </li>
-            </ul>
+            </List>
 
             
             <Suspense fallback={<Loader />}>

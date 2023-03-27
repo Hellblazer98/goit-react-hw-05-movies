@@ -1,20 +1,23 @@
 import PropTypes from 'prop-types';
-import { Link, useLocation } from "react-router-dom";
+import {useLocation } from "react-router-dom";
+import { ListMovies, Movie, MovieLink } from './MovieList.styled';
+import {HiFilm} from "react-icons/hi";
 
 export const MovieList = ({ movies }) => {
     const location = useLocation();
 
     return (
-        <ul>
+        <ListMovies>
             {movies.map((movie => 
               
-                <li key={movie.id}>
-                    <Link to={`/movies/${movie.id}`} state={{ from: location }}>
+                <Movie key={movie.id}>
+                <HiFilm size='22' />
+                <MovieLink to={`/movies/${movie.id}`} state={{ from: location }}>
                   {movie.title}
-                  </Link>
-                </li>
+                  </MovieLink>
+                </Movie>
             ))}
-        </ul>
+        </ListMovies>
     )
 }
 

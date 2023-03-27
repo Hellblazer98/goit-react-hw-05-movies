@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { getMovieCast } from "helpers/api";
 import NotFound from '../../image/not-found.jpg';
 import { Loader } from "components/Loader/Loader";
+import { CastImage, CastItem, CastList } from "./Cast.styled";
 
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -34,15 +35,15 @@ const Cast = () => {
         {isLoading && <Loader />}
         {error && <span>{error}</span>}
             {cast.length ?
-                <ul>
+                <CastList>
                     {cast.map(({ character, name, credit_id, profile_path, original_name }) =>
-                        <li key={credit_id}>
-                            <img src={profile_path ? `${IMG_URL}${profile_path}` : NotFound} alt={original_name} />
+                        <CastItem key={credit_id}>
+                            <CastImage src={profile_path ? `${IMG_URL}${profile_path}` : NotFound} alt={original_name} />
                             <h3>{name}</h3>
                             <p>Character: {character}</p>
-                        </li>
+                        </CastItem>
                     )}
-                </ul>
+                </CastList>
                 : <p>Sorry, we don't have cast information for this movie.</p>}
 
         </section>
